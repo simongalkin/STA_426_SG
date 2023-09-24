@@ -1,0 +1,58 @@
+---
+title: "STA426 EX1PB"
+author: "Simon Galkin"
+format: 
+    html:
+        self-contained: true
+editor: visual
+---
+
+## STA426 EX1PB
+
+> #### Create an executable HTML document with R code that samples 100 values from a log-normal distribution (mu=5, sigma=0.5)
+
+```{r}
+set.seed(13)
+values <- rlnorm (100, meanlog = 5, sdlog = 0.5)
+```
+
+> #### Using the ggplot2 package, create a histogram of the sampled data on both the linear and log scales
+
+1.  (Installing the library)
+2.  Importing the library
+3.  Plotting histograms
+
+```{r}
+#install.packages("ggplot2") 
+library("ggplot2")
+
+
+ggplot(data = data.frame(values), aes(x = values)) +
+  geom_histogram(binwidth = 20, color = 'cyan') +
+  labs(title = "Linear scale")
+
+ggplot(data = data.frame(values), aes(x = values)) +
+  geom_histogram(binwidth = 0.05, color = 'cyan') +
+  labs(title = "Log scale") +
+  scale_x_log10()
+```
+
+> #### Create also a violin plot
+
+```{r}
+ggplot(data = data.frame(values), aes(x = values, y = values)) +
+  geom_violin(color = 'cyan')
+
+```
+
+> #### Report the mean and standard deviation of your sampled values in line in the text
+
+The mean: `r mean(values)`
+
+The SD: `r sd(values)`
+
+```{r}
+#commands that were used to calculate the mean and SD
+mean(values)
+sd(values)
+```
